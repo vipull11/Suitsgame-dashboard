@@ -11,7 +11,7 @@ export default function Account() {
  
     const handleButtonClick = () => {
       
-      window.location.href = 'https://suitscardgame.com'
+      window.location.href = 'http://suitscardgame.com'
     };
   
 

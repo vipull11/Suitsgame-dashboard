@@ -21,7 +21,7 @@ export default function Payment() {
   });
   const handleButtonClick = () => {
       
-    window.location.href = 'https://suitscardgame.com'
+    window.location.href = 'http://suitscardgame.com'
    
   };
 
