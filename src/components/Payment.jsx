@@ -27,9 +27,9 @@ export default function Payment() {
 
 
   const handleWithdrawalSubmit = () => {
-    if (withdrawAmount < 4000) {
+    if (withdrawAmount < 1000) {
       setErrorMessage('Withdrawal amount should be above 1000');
-      return; // Stop further execution if withdrawal amount is below 4000
+      return; // Stop further execution if withdrawal amount is below 1000
     }
     if (withdrawAmount > userData.data.totalCash) {
       setErrorMessage('You do not have enough cash');
