@@ -31,7 +31,7 @@ const Stripe = () => {
       "Content-Type": "application/json",
     };
     const response = await fetch(
-      "https://www.suitscardgame.com/api/v1/auth/buy-coins",
+      "https://api.suitscardgame.com/api/v1/auth/buy-coins",
       {
         method: "POST",
         headers: headers,

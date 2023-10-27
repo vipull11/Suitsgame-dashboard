@@ -8,6 +8,13 @@ import { purple } from '@mui/material/colors';
 export default function Account() {
   const { userData } = useUser();
 
+ 
+    const handleButtonClick = () => {
+      
+      window.location.href = 'https://suitscardgame.com'
+    };
+  
+
     if (!userData) {
          return<div style={{width:'100vw' , height: '100vh', display: 'flex' , justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
          <div class="hourglass">
@@ -238,8 +245,9 @@ export default function Account() {
         color="primary"
         size="large"
         style={{ margin: '8px auto 20px', backgroundColor: 'green' ,   fontFamily: 'inherit',
-        marginTop: '15px'
+        marginTop: '15px',  
       }}
+      onClick = {handleButtonClick}
       >
         Back to Game
       </Button>

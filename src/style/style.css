@@ -47,7 +47,7 @@
 .box-left{
     border: 25px solid transparent;
     border-image: url(rectangle.png) 50 round;
-    width: 20vw;
+   
     height: 5vh;
     display: flex;
     flex-direction: row;

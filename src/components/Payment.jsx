@@ -12,22 +12,49 @@ export default function Payment() {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [paymentId, setPaymentId] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [token, setToken] = useState(() => {
+    // Retrieve token from local storage or set it to an empty string if not found
+    return localStorage.getItem('token1');
+    
+  });
+  const handleButtonClick = () => {
+      
+    window.location.href = 'https://suitscardgame.com'
+   
+  };
+
 
   const handleWithdrawalSubmit = () => {
-    // Make API call to submit withdrawal request
-    console.log(userData.data._id)
+    if (withdrawAmount < 4000) {
+      setErrorMessage('Withdrawal amount should be above 1000');
+      return; // Stop further execution if withdrawal amount is below 4000
+    }
+    if (withdrawAmount > userData.data.totalCash) {
+      setErrorMessage('You do not have enough cash');
+      return;
+    }
+    console.log(userData.data.totalCash)
+    console.log(token)
     axios
-      .post('https://www.suitscardgame.com//api/v1/payment/withdrawl', {
-        withdrawAmount: withdrawAmount,
-        paymentAddress: paymentId,
-        userName: userData.data.FullName,
-        userID: userData.data._id,
-      })
+    .post('https://api.suitscardgame.com/api/v1/auth/withdrawl', {
+      withdrawlAmount: withdrawAmount,
+      paymentAddress: paymentId,
+      userName: userData.data.FullName,
+      userID: userData.data._id
+    // }, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
+    //   }
+    })
       .then((response) => {
         // Handle the API response here
         if (response.data.success) {
           // Show a success message or perform any necessary actions
           console.log('Request sent successfully');
+          setIsModalOpen(false);
+         window.location.reload(); // 
         } else {
           // Handle the case when the request fails
           console.error('Request failed:', response.data.message);
@@ -54,7 +81,7 @@ export default function Payment() {
     margin={{ xs: '5px', md: '30px' }}
     borderRadius='30px'
     padding='30px'
-      backgroundColor='#00350E'
+    backgroundColor='#00350E'
       display='flex'    
       flexDirection='column'  
       alignContent='center'
@@ -93,7 +120,7 @@ export default function Payment() {
 
       >
         Withdrawal Limit 
-        <h4 className='paymentDataText'>4000</h4>
+        <h4 className='paymentDataText'>1000</h4>
 
         </Box> 
        
@@ -113,6 +140,8 @@ export default function Payment() {
            className='pixel1'
             variant='outlined'
             placeholder='Enter Cashout amount'
+            value={withdrawAmount} // Bind the input field with withdrawAmount state
+            onChange={(e) => setWithdrawAmount(e.target.value)} // Update withdrawAmount state when the input changes
             InputProps={{
               style: {
                 color: 'white',
@@ -198,14 +227,15 @@ export default function Payment() {
       
         <div style={{
           display:'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           // border: '3px solid',
           marginLeft: '25px',
           marginRight:'15%',
           fontFamily: 'myFirstFont'
 
         }}>
-          <Button variant='contained'
+          {/* <Button variant='contained'
+          
             style={{
               fontSize: '18px',                                      
                fontWeight: '100',
@@ -221,7 +251,7 @@ export default function Payment() {
             }}
           >
     Add Money
-  </Button>
+  </Button> */}
           <Button
             style={{
               fontSize: '18px',
@@ -237,12 +267,18 @@ export default function Payment() {
                fontFamily: 'inherit'
 
           }}
+          onClick={handleButtonClick}
           >
      Back to game
   </Button>
 </div> 
 
-    </Box>  
+    </Box> 
+    {errorMessage && (
+        <Box style={{ marginTop: '20px', color: 'red', fontFamily: 'myFirstFont' }}>
+          {errorMessage}
+        </Box>
+      )} 
   </Box>
   )
 }

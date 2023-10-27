@@ -12,16 +12,19 @@ export const UserProvider = ({ children }) => {
     const fetchData = async () => {
       const params = new URLSearchParams(window.location.search);
       const dataParam = params.get('data');
+     
 
       if (dataParam) {
         const jsonData = JSON.parse(decodeURIComponent(dataParam));
+        console.log(jsonData.token);
         if (jsonData.token) {
           setToken(jsonData.token);
           const decoded = jwt_decode(jsonData.token);
+          localStorage.setItem('token1', jsonData.token);
           const userId = decoded.id;
 
           try {
-            const apiUrl = `https://www.suitscardgame.com/api/v1/auth/getuser/${userId}`;
+            const apiUrl = `https://api.suitscardgame.com/api/v1/auth/getuser/${userId}`;
             const response = await axios.get(apiUrl, {
               headers: {
                 Authorization: `Bearer ${jsonData.token}`,
