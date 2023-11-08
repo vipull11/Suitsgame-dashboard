@@ -1,7 +1,7 @@
 import React from 'react';
 import '../style/modal.css'; // Import the CSS file for modal styling
 
-const Modal = ({ handleClose, children }) => {
+const Modal1 = ({ handleClose, children }) => {
   return (
     <div className="modal">
       <div className="modal-content">
@@ -14,4 +14,4 @@ const Modal = ({ handleClose, children }) => {
   );
 };
 
-export default Modal;
+export default Modal1;

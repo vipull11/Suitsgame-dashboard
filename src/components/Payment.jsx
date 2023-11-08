@@ -3,6 +3,9 @@ import { Box ,Button, TextField, Modal} from '@mui/material';
 import { useUser } from '../services/useContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Stripe from './stripe';
+import Modal1 from './modal';
+
  
 import '../style/style.css';
 
@@ -12,6 +15,7 @@ export default function Payment() {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [paymentId, setPaymentId] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModal1Open, setIsModal1Open] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [token, setToken] = useState(() => {
@@ -27,9 +31,9 @@ export default function Payment() {
 
 
   const handleWithdrawalSubmit = () => {
-    if (withdrawAmount < 1000) {
+    if (withdrawAmount < 4000) {
       setErrorMessage('Withdrawal amount should be above 1000');
-      return; // Stop further execution if withdrawal amount is below 1000
+      return; // Stop further execution if withdrawal amount is below 4000
     }
     if (withdrawAmount > userData.data.totalCash) {
       setErrorMessage('You do not have enough cash');
@@ -71,26 +75,42 @@ export default function Payment() {
       return <div></div>;
     }
 
+  
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const openModal1 = () => {
+    setIsModal1Open(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const closeModal1 = () => {
+    setIsModal1Open(false);
+  };
+
   return (
    
     <Box
     className='pixel'
-    fontFamily= 'myFirstFont'
-    height='63vh'
-    width='100%'
+    fontFamily='myFirstFont'
+    
+    width='90%'
     margin={{ xs: '5px', md: '30px' }}
     borderRadius='30px'
     padding='30px'
     backgroundColor='#00350E'
-      display='flex'    
-      flexDirection='column'  
-      alignContent='center'
-    // justifyContent='center'
-     alignItems='center'
-    >
+    display='flex'
+    flexDirection='column'
+    alignContent='center'
+    alignItems='center'
+  >
 
       <Box
-        width='60%'
+       
       >
         
         
@@ -129,6 +149,7 @@ export default function Payment() {
           style={{
           display:'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
           // border: '3px solid',
           marginLeft: '25px',
           marginRight:'15%',
@@ -167,7 +188,7 @@ export default function Payment() {
           backgroundColor: '#1D9A3C',
           margin: '0',
           width: '40%',
-          height: '8vh',
+         marginLeft: '35px',
           borderRadius: '25px',
           fontFamily: 'inherit',
         }}
@@ -206,6 +227,7 @@ export default function Payment() {
               fontWeight: '100',
               color: 'white',
               textAlign: 'center',
+
               backgroundColor: '#1D9A3C',
               width: '100%',
               borderRadius: '25px',
@@ -234,24 +256,24 @@ export default function Payment() {
           fontFamily: 'myFirstFont'
 
         }}>
-          {/* <Button variant='contained'
-          
-            style={{
-              fontSize: '18px',                                      
-               fontWeight: '100',
-               color: 'Black',
-               textAlign: 'center',
-               backgroundColor: '#FFD100',
-               margin: '0',
-               width: '40%',
-               height: '5vh',
-               borderRadius:'25px',
-               fontFamily:'inherit'
+          <Button variant="contained" style={{
+        fontSize: '18px',
+        fontWeight: '100',
+        color: 'Black',
+        textAlign: 'center',
+        backgroundColor: '#FFD100',
+        margin: '5px',
+        borderRadius:'25px',
+        fontFamily:'inherit'
+      }} onClick={openModal1}>
+        Add Money
+      </Button>
 
-            }}
-          >
-    Add Money
-  </Button> */}
+      {isModal1Open && (
+        <Modal1 handleClose={closeModal1}>
+          <Stripe />
+        </Modal1>
+      )}
           <Button
             style={{
               fontSize: '18px',
@@ -260,9 +282,8 @@ export default function Payment() {
                color: 'white',
                textAlign: 'center',
                backgroundColor: '#1D9A3C',
-               margin: '0',
-               width: '40%',
-                     height: '5vh',
+               margin: '5px',
+              
                borderRadius:'25px',
                fontFamily: 'inherit'
 

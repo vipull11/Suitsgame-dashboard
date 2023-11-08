@@ -9,7 +9,7 @@ import bg1 from '../images/bg1.jpeg'
 import { useUser } from '../services/useContext';
 import { useState, useEffect } from 'react';
 import Stripe from './stripe';
-import Modal from './modal';
+import Modal1 from './modal';
 
 
 export default function NavBar() {
@@ -107,9 +107,9 @@ export default function NavBar() {
         style={{ cursor: 'pointer' }}
       />
       {isModalOpen && (
-        <Modal handleClose={closeModal}>
+        <Modal1 handleClose={closeModal}>
           <Stripe />
-        </Modal>
+        </Modal1>
       )}
 
         </Box>
