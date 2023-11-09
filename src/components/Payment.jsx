@@ -225,7 +225,7 @@ export default function Payment() {
                 border: '10px solid #green',
                 borderRadius:'25px',
                 fontFamily:'myFirstFont',
-                fontSize: '1.5vw'
+                fontSize: '2.5vw'
 
               },
                
@@ -237,7 +237,7 @@ export default function Payment() {
           />
           <Button
         style={{
-          fontSize: '18px',
+          
           fontWeight: '100',
           color: 'white',
           textAlign: 'center',
