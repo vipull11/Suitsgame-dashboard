@@ -52,7 +52,7 @@ export default function Account() {
               <p className='pixel1' style={{ margin: '0', width: '80%', backgroundColor: '#0F6725', borderRadius: '20px', marginTop: '6px' }}>{userData.data.FullName}</p>
             </div>
             <div style={{ width: '100%',  display: 'flex' , marginTop: '20px', flexDirection: 'column' , alignItems: 'center' , justifyContent: 'center'}}>
-              <h2 style={{ fontFamily: 'myFirstFont', margin: '0' }}>tournament Streak</h2>
+              <h2 style={{ fontFamily: 'myFirstFont', margin: '0' }}>Tournament Streak</h2>
               <p className='pixel1' style={{ margin: '0', width: '80%', backgroundColor: '#0F6725', borderRadius: '20px', marginTop: '6px' }}>{userData.data.tournamentStreak}</p>
             </div>
             <div style={{ width: '100%',  display: 'flex' , marginTop: '20px', flexDirection: 'column' , alignItems: 'center' , justifyContent: 'center'}}>
