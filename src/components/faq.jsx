@@ -31,7 +31,7 @@ export default function Faq() {
   };
 
   const questionStyle = {
-    fontSize: '1rem',
+    fontSize: '1.4rem',
     fontWeight: 'bold',
     color: 'white',
     marginBottom: '10px',
@@ -40,7 +40,7 @@ export default function Faq() {
   };
 
   const answerStyle = {
-    fontSize: '0.8rem',
+    fontSize: '1rem',
     color: 'white',
     marginBottom: '20px',
     maxWidth: '100%',

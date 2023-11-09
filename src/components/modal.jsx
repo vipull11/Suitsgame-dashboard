@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/modal.css'; // Import the CSS file for modal styling
 
+
 const Modal1 = ({ handleClose, children }) => {
   return (
     <div className="modal">

@@ -12,6 +12,11 @@ import image3 from '../images/HA.png';
 import image4 from '../images/SA.png';
 import Stripe from './stripe';
 import Modal from './modal';
+import { FaBars } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
+import Faq from './faq';
+import Contact from './contactUs';
+
 
 export default function MobileSidebar({setAccount }) {
   const [AccountBackground, setAccountbackground] =
@@ -31,9 +36,7 @@ const [paymentBackground, setpaymentbackground] =
     setIsModalOpen(false);
   };
 
-  const handleFaqClick = () => {
-    setAccount(2);
-  };
+ 
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -42,11 +45,20 @@ const [paymentBackground, setpaymentbackground] =
   if (!userData) {
     return <div></div>;
   }
+
+  const handleFaqClick = () => {
+       
+    setAccount(2); 
+  };
+  const handleContactClick = () => {
+   
+    setAccount(3); 
+  };
    
   return(
   <div className={`mobile-sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
   <button className={`toggle-button ${isExpanded ? 'expanded' : ''}`} onClick={toggleSidebar}>
-    {isExpanded ? '◄' : '►'}
+    {isExpanded ? <AiOutlineClose /> : < FaBars />}
   </button>
   {isExpanded && (
     <Box className='sidebar-content'>
@@ -55,7 +67,7 @@ const [paymentBackground, setpaymentbackground] =
           <div className='box-right-id1' style={{marginBottom: '30px'}}>
             <h2
                 style={{
-                    fontSize: '2rem',
+                    
                     margin: '0',
                     fontWeight: '400',
                     color: 'white',
@@ -110,7 +122,7 @@ const [paymentBackground, setpaymentbackground] =
 
         </div>
 
-        <div style={{display:'flex' , flexDirection: 'row', marginBottom: '30px'}}>
+        <div style={{display:'flex' , flexDirection: 'row', marginBottom: '30px' , transition: 'width 1s ease'}}>
       
             <Box
                 display='flex'
@@ -134,6 +146,7 @@ const [paymentBackground, setpaymentbackground] =
       <Button
          className='custom-button'
          style={{
+            transition: 'width 3s ease',
              color: 'white',
              fontFamily: 'myFirstFont',
              fontSize: '2rem',
@@ -152,6 +165,7 @@ const [paymentBackground, setpaymentbackground] =
       <Button
         className='custom-button'
         style={{
+          transition: 'width 3s ease',
             color: 'white',
             fontFamily: 'myFirstFont',
             fontSize: '2rem',
@@ -166,7 +180,13 @@ const [paymentBackground, setpaymentbackground] =
       >
         Payment
       </Button>
-      {/* Rest of your sidebar content */}
+      <Box 
+        fontWeight='100'
+>
+            <p style={{ cursor: 'pointer', color: 'white' }} onClick={handleFaqClick}>FAQs</p>
+            
+            <p style={{ cursor: 'pointer', color: 'white'}} onClick={handleContactClick}>Contact us</p>
+        </Box>
     </Box>
   )}
 </div>

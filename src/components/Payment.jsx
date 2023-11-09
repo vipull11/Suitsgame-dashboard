@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Stripe from './stripe';
 import Modal1 from './modal';
+import toast, { Toaster , ToastBar} from 'react-hot-toast';
+
 
  
 import '../style/style.css';
@@ -29,17 +31,24 @@ export default function Payment() {
    
   };
 
+  const notify = () => {
+  if( withdrawAmount != 1000 ){
+   toast('The Amount Should Be 1000.');
+   return;
+  }
+  if (withdrawAmount > userData.data.totalCash) {
+    toast('You do not have enough cash.');
+    return;
 
-  const handleWithdrawalSubmit = () => {
-    if (withdrawAmount < 4000) {
-      setErrorMessage('Withdrawal amount should be above 1000');
-      return; // Stop further execution if withdrawal amount is below 4000
-    }
-    if (withdrawAmount > userData.data.totalCash) {
-      setErrorMessage('You do not have enough cash');
-      return;
-    }
-    console.log(userData.data.totalCash)
+
+  }
+
+  const notify1 = () => {
+    toast('Success');
+  }
+
+
+  console.log(userData.data.totalCash)
     console.log(token)
     axios
     .post('https://api.suitscardgame.com/api/v1/auth/withdrawl', {
@@ -47,20 +56,21 @@ export default function Payment() {
       paymentAddress: paymentId,
       userName: userData.data.FullName,
       userID: userData.data._id
-    // }, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
-    //   }
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
+      }
     })
       .then((response) => {
         // Handle the API response here
         if (response.data.success) {
-          // Show a success message or perform any necessary actions
+         
+        
           console.log('Request sent successfully');
           setIsModalOpen(false);
-         window.location.reload(); // 
+     
         } else {
-          // Handle the case when the request fails
+         
           console.error('Request failed:', response.data.message);
         }
         setIsModalOpen(false); // Close the modal after the request is processed
@@ -69,7 +79,53 @@ export default function Payment() {
         console.error('Error submitting withdrawal request:', error);
         setIsModalOpen(false); // Close the modal in case of error
       });
-  };
+}
+
+  // const handleWithdrawalSubmit = () => {
+  //   if (withdrawAmount < 1000 && withdrawAmount < userData.data.totalCash) {
+  //     setErrorMessage('Withdrawal amount should be above 1000');
+  //     notify(); 
+    
+  //     return; // Stop further execution if withdrawal amount is below 4000
+  //   }
+  //   if (withdrawAmount > userData.data.totalCash ) {
+  //     setErrorMessage('You do not have enough cash');
+  //     notify(); 
+  //     return;
+  //   }
+  //   console.log(userData.data.totalCash)
+  //   console.log(token)
+  //   axios
+  //   .post('https://api.suitscardgame.com/api/v1/auth/withdrawl', {
+  //     withdrawlAmount: withdrawAmount,
+  //     paymentAddress: paymentId,
+  //     userName: userData.data.FullName,
+  //     userID: userData.data._id
+  //   }, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
+  //     }
+  //   })
+  //     .then((response) => {
+  //       // Handle the API response here
+  //       if (response.data.success) {
+  //         // Show a success message or perform any necessary actions
+          
+  //         console.log('Request sent successfully');
+          
+  //         setIsModalOpen(false);
+  //        window.location.reload(); // 
+  //       } else {
+  //         // Handle the case when the request fails
+  //         console.error('Request failed:', response.data.message);
+  //       }
+  //       setIsModalOpen(false); // Close the modal after the request is processed
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error submitting withdrawal request:', error);
+  //       setIsModalOpen(false); // Close the modal in case of error
+  //     });
+  // };
 
   if (!userData) {
       return <div></div>;
@@ -232,10 +288,13 @@ export default function Payment() {
               width: '100%',
               borderRadius: '25px',
             }}
-            onClick={handleWithdrawalSubmit}
+            onClick={notify}
+            
           >
             Submit
           </Button>
+          <Toaster />
+
         </Box>
       </Modal>
     </Box>

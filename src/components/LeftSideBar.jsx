@@ -23,6 +23,10 @@ const [paymentBackground, setpaymentbackground] =
        
         setAccount(2); 
       };
+      const handleContactClick = () => {
+       
+        setAccount(3); 
+      };
 
   return (
 
@@ -100,7 +104,7 @@ const [paymentBackground, setpaymentbackground] =
 >
             <p style={{ cursor: 'pointer' }} onClick={handleFaqClick}>FAQs</p>
             
-            <p>Contact us</p>
+            <p style={{ cursor: 'pointer' }} onClick={handleContactClick}>Contact us</p>
         </Box>
    
 

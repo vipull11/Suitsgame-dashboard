@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import Account from './Account';
 import Payment from './Payment';
 import Faq from './faq';
+import Contact from './contactUs';
 
 export default function Home() {
   const [isAccount, setAccount] = useState(1);
@@ -47,6 +48,7 @@ export default function Home() {
         {isAccount === 1 && <Account />}
         {isAccount === 0 && <Payment />}
         {isAccount === 2 && <Faq />}
+        {isAccount === 3 && <Contact />}
       </Box>
     </Box>
   );

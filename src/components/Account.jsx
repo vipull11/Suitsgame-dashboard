@@ -25,7 +25,7 @@ export default function Account() {
       }
       return (
         <Box
-          className='pixel'
+          className='pixel7'
           width='100vw'
           margin={{ xs: '5px', md: '30px', sm: '5px' }}
           
@@ -46,13 +46,14 @@ export default function Account() {
             alignItems='center'
             justifyContent='center'
           >
+            {console.log(userData)}
             <div style={{ width: '100%',  display: 'flex' , flexDirection: 'column' , alignItems: 'center' , justifyContent: 'center'}}>
               <h2 style={{ fontFamily: 'myFirstFont', margin: '0' }}>First Name</h2>
               <p className='pixel1' style={{ margin: '0', width: '80%', backgroundColor: '#0F6725', borderRadius: '20px', marginTop: '6px' }}>{userData.data.FullName}</p>
             </div>
             <div style={{ width: '100%',  display: 'flex' , marginTop: '20px', flexDirection: 'column' , alignItems: 'center' , justifyContent: 'center'}}>
-              <h2 style={{ fontFamily: 'myFirstFont', margin: '0' }}>Account Type</h2>
-              <p className='pixel1' style={{ margin: '0', width: '80%', backgroundColor: '#0F6725', borderRadius: '20px', marginTop: '6px' }}>{userData.data.accountType}</p>
+              <h2 style={{ fontFamily: 'myFirstFont', margin: '0' }}>tournament Streak</h2>
+              <p className='pixel1' style={{ margin: '0', width: '80%', backgroundColor: '#0F6725', borderRadius: '20px', marginTop: '6px' }}>{userData.data.tournamentStreak}</p>
             </div>
             <div style={{ width: '100%',  display: 'flex' , marginTop: '20px', flexDirection: 'column' , alignItems: 'center' , justifyContent: 'center'}}>
               <h2 style={{ fontFamily: 'myFirstFont', margin: '0' }}>User Id</h2>
