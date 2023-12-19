@@ -52,7 +52,7 @@ export default function Contact() {
       <div style={answerStyle}>
         <h2>
           Have questions or concerns? Feel free to reach out to us! Our dedicated support team is here to assist you. For all inquiries, please email us at{' '}
-          <a style={{color: "#FFD100"}} href="mailto:jeremy@zodiak.games">jeremy@zodiak.games</a>.
+          <a style={{color: "#FFD100"}} href="mailto:suitscardgame@gmail.com">suitscardgame@gmail.com</a>.
         </h2>
       </div>
       </div>

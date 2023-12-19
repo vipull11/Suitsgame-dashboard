@@ -154,7 +154,7 @@ export default function Payment() {
     className='pixel'
     fontFamily='myFirstFont'
     
-    width='90%'
+    width='70%'
     margin={{ xs: '5px', md: '30px' }}
     borderRadius='30px'
     padding='30px'
@@ -165,9 +165,7 @@ export default function Payment() {
     alignItems='center'
   >
 
-      <Box
-       
-      >
+      
         
         
       <Box
@@ -206,9 +204,8 @@ export default function Payment() {
           display:'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          // border: '3px solid',
-          marginLeft: '25px',
-          marginRight:'15%',
+          
+          width: '80%',
           fontFamily:'myFirstFont'
 
         }}
@@ -225,13 +222,13 @@ export default function Payment() {
                 border: '10px solid #green',
                 borderRadius:'25px',
                 fontFamily:'myFirstFont',
-                fontSize: '2.5vw'
+                
 
               },
                
             }}
             InputLabelProps={{
-              style: { color: 'white' },           
+              style: { color: 'white',  width: '20vw' },           
           }}
             
           />
@@ -243,7 +240,7 @@ export default function Payment() {
           textAlign: 'center',
           backgroundColor: '#1D9A3C',
           margin: '0',
-          width: '40%',
+          width: '20%',
          marginLeft: '35px',
           borderRadius: '25px',
           fontFamily: 'inherit',
@@ -308,20 +305,20 @@ export default function Payment() {
       
         <div style={{
           display:'flex',
-          justifyContent: 'center',
+          justifyContent: 'space-evenly',
+          width: '80%',
           // border: '3px solid',
-          marginLeft: '25px',
-          marginRight:'15%',
+          
           fontFamily: 'myFirstFont'
 
         }}>
           <Button variant="contained" style={{
-        fontSize: '18px',
+        
         fontWeight: '100',
         color: 'Black',
         textAlign: 'center',
         backgroundColor: '#FFD100',
-        margin: '5px',
+        
         borderRadius:'25px',
         fontFamily:'inherit'
       }} onClick={openModal1}>
@@ -335,13 +332,13 @@ export default function Payment() {
       )}
           <Button
             style={{
-              fontSize: '18px',
+              
                
                fontWeight: '100',
                color: 'white',
                textAlign: 'center',
                backgroundColor: '#1D9A3C',
-               margin: '5px',
+             
               
                borderRadius:'25px',
                fontFamily: 'inherit'
@@ -353,7 +350,7 @@ export default function Payment() {
   </Button>
 </div> 
 
-    </Box> 
+    
     {errorMessage && (
         <Box style={{ marginTop: '20px', color: 'red', fontFamily: 'myFirstFont' }}>
           {errorMessage}

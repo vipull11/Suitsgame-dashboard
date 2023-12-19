@@ -89,6 +89,7 @@
 .payment-box{
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 /* style.css */
 .rounded-button {

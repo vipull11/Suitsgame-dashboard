@@ -14,10 +14,12 @@
   
   .modal-content {
     background-color: rgb(16, 84, 4);
-  
+    border-radius:20px ;
     text-align: center;
     border: 20px solid transparent;
     border-image: url(rectangle.png) 50 round;
+    width: 40vw;
+    height: 30vw;
   }
   
   .close {
