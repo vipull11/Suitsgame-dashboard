@@ -18,8 +18,8 @@
     text-align: center;
     border: 20px solid transparent;
     border-image: url(rectangle.png) 50 round;
-    width: 40vw;
-    height: 30vw;
+    width: 30vw;
+    height: 30vh;
   }
   
   .close {

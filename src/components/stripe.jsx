@@ -54,12 +54,19 @@ const Stripe = () => {
   return (
     <div className="payment-box">
       <form style={{display:'flex' , flexDirection: 'column' , alignItems: 'center' , justifyContent: 'center' , height: '100%'}} onSubmit={submitHandler}>
-        <label style={{fontSize :'3rem'}} htmlFor="ammount" >Enter amount</label>
+        <label style={{fontSize :'2rem' , }} htmlFor="ammount" >Enter amount</label>
         <input
           type="number"
           name="amount"
           value={amount}
           onChange={handleAmmountChange}
+          style={{
+            width: '25vw',
+            height: '5vh',
+            textAlign: 'center',
+            fontSize: '1.5rem',
+
+          }}
         />
 
         <button

@@ -159,7 +159,7 @@ export default function NavBar() {
 
                 }}
             >{userData.data.FullName}</h2>
-            <h4
+            {/* <h4
                 style={{
                     margin: '0',
                     textAlign: 'right',
@@ -169,7 +169,7 @@ export default function NavBar() {
             >
                {userData.data._id}
 
-            </h4>
+            </h4> */}
        
             </div>
         <Box

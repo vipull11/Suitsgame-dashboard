@@ -210,45 +210,8 @@ export default function Payment() {
 
         }}
         >
-          <TextField
-           className='pixel1'
-            variant='outlined'
-            placeholder='Enter Cashout amount'
-            value={withdrawAmount} // Bind the input field with withdrawAmount state
-            onChange={(e) => setWithdrawAmount(e.target.value)} // Update withdrawAmount state when the input changes
-            InputProps={{
-              style: {
-                color: 'white',
-                border: '10px solid #green',
-                borderRadius:'25px',
-                fontFamily:'myFirstFont',
-                
-
-              },
-               
-            }}
-            InputLabelProps={{
-              style: { color: 'white',  width: '20vw' },           
-          }}
-            
-          />
-          <Button
-        style={{
-          
-          fontWeight: '100',
-          color: 'white',
-          textAlign: 'center',
-          backgroundColor: '#1D9A3C',
-          margin: '0',
-          width: '20%',
-         marginLeft: '35px',
-          borderRadius: '25px',
-          fontFamily: 'inherit',
-        }}
-        onClick={() => setIsModalOpen(true)}
-      >
-        Submit
-      </Button>
+         
+         
 
       <Modal style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}} open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box className='modal-content'>
@@ -280,7 +243,7 @@ export default function Payment() {
               fontWeight: '100',
               color: 'white',
               textAlign: 'center',
-
+              fontFamily: 'myFirstFont',
               backgroundColor: '#1D9A3C',
               width: '100%',
               borderRadius: '25px',
@@ -307,43 +270,50 @@ export default function Payment() {
           display:'flex',
           justifyContent: 'space-evenly',
           width: '80%',
-          // border: '3px solid',
+          fontFamily: 'myFirstFont',
+          flexWrap: 'wrap',
+
+         
+
           
-          fontFamily: 'myFirstFont'
 
         }}>
-          <Button variant="contained" style={{
-        
-        fontWeight: '100',
-        color: 'Black',
-        textAlign: 'center',
-        backgroundColor: '#FFD100',
-        
-        borderRadius:'25px',
-        fontFamily:'inherit'
-      }} onClick={openModal1}>
+         <Button
+             
+             variant="contained"
+             className='pixel1'
+             color="primary"
+             size="large"
+             style={{ margin: '20px 0', backgroundColor: '#ffd100', fontFamily: 'inherit', color : 'black' }}
+         
+          onClick={openModal1}>
         Add Money
       </Button>
+
 
       {isModal1Open && (
         <Modal1 handleClose={closeModal1}>
           <Stripe />
         </Modal1>
       )}
-          <Button
-            style={{
-              
-               
-               fontWeight: '100',
-               color: 'white',
-               textAlign: 'center',
-               backgroundColor: '#1D9A3C',
-             
-              
-               borderRadius:'25px',
-               fontFamily: 'inherit'
 
-          }}
+        <Button
+         variant="contained"
+         className='pixel1'
+         color="primary"
+         size="large"
+         style={{ margin: '20px 0', backgroundColor: '#ffd100', fontFamily: 'inherit' , color : 'black' }}
+        onClick={() => setIsModalOpen(true)}
+      >
+        Withdraw Cash
+      </Button>
+          <Button
+             
+             variant="contained"
+             className='pixel1'
+             color="primary"
+             size="large"
+             style={{ margin: '20px 0', backgroundColor: 'green', fontFamily: 'inherit' }}
           onClick={handleButtonClick}
           >
      Back to game
