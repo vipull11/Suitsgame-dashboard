@@ -3,6 +3,11 @@ import { Box ,Button, TextField, Modal} from '@mui/material';
 import { useUser } from '../services/useContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Stripe from './stripe';
+import Modal1 from './modal';
+import toast, { Toaster , ToastBar} from 'react-hot-toast';
+
+
  
 import '../style/style.css';
 
@@ -12,6 +17,7 @@ export default function Payment() {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [paymentId, setPaymentId] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModal1Open, setIsModal1Open] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [token, setToken] = useState(() => {
@@ -25,17 +31,24 @@ export default function Payment() {
    
   };
 
+  const notify = () => {
+  if( withdrawAmount != 1000 ){
+   toast('The Amount Should Be 1000.');
+   return;
+  }
+  if (withdrawAmount > userData.data.totalCash) {
+    toast('You do not have enough cash.');
+    return;
 
-  const handleWithdrawalSubmit = () => {
-    if (withdrawAmount < 1000) {
-      setErrorMessage('Withdrawal amount should be above 1000');
-      return; // Stop further execution if withdrawal amount is below 1000
-    }
-    if (withdrawAmount > userData.data.totalCash) {
-      setErrorMessage('You do not have enough cash');
-      return;
-    }
-    console.log(userData.data.totalCash)
+
+  }
+
+  const notify1 = () => {
+    toast('Success');
+  }
+
+
+  console.log(userData.data.totalCash)
     console.log(token)
     axios
     .post('https://api.suitscardgame.com/api/v1/auth/withdrawl', {
@@ -43,20 +56,21 @@ export default function Payment() {
       paymentAddress: paymentId,
       userName: userData.data.FullName,
       userID: userData.data._id
-    // }, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
-    //   }
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
+      }
     })
       .then((response) => {
         // Handle the API response here
         if (response.data.success) {
-          // Show a success message or perform any necessary actions
+         
+        
           console.log('Request sent successfully');
           setIsModalOpen(false);
-         window.location.reload(); // 
+     
         } else {
-          // Handle the case when the request fails
+         
           console.error('Request failed:', response.data.message);
         }
         setIsModalOpen(false); // Close the modal after the request is processed
@@ -65,33 +79,93 @@ export default function Payment() {
         console.error('Error submitting withdrawal request:', error);
         setIsModalOpen(false); // Close the modal in case of error
       });
-  };
+}
+
+  // const handleWithdrawalSubmit = () => {
+  //   if (withdrawAmount < 1000 && withdrawAmount < userData.data.totalCash) {
+  //     setErrorMessage('Withdrawal amount should be above 1000');
+  //     notify(); 
+    
+  //     return; // Stop further execution if withdrawal amount is below 4000
+  //   }
+  //   if (withdrawAmount > userData.data.totalCash ) {
+  //     setErrorMessage('You do not have enough cash');
+  //     notify(); 
+  //     return;
+  //   }
+  //   console.log(userData.data.totalCash)
+  //   console.log(token)
+  //   axios
+  //   .post('https://api.suitscardgame.com/api/v1/auth/withdrawl', {
+  //     withdrawlAmount: withdrawAmount,
+  //     paymentAddress: paymentId,
+  //     userName: userData.data.FullName,
+  //     userID: userData.data._id
+  //   }, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`, // Attach the JWT token to the Authorization header
+  //     }
+  //   })
+  //     .then((response) => {
+  //       // Handle the API response here
+  //       if (response.data.success) {
+  //         // Show a success message or perform any necessary actions
+          
+  //         console.log('Request sent successfully');
+          
+  //         setIsModalOpen(false);
+  //        window.location.reload(); // 
+  //       } else {
+  //         // Handle the case when the request fails
+  //         console.error('Request failed:', response.data.message);
+  //       }
+  //       setIsModalOpen(false); // Close the modal after the request is processed
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error submitting withdrawal request:', error);
+  //       setIsModalOpen(false); // Close the modal in case of error
+  //     });
+  // };
 
   if (!userData) {
       return <div></div>;
     }
 
+  
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const openModal1 = () => {
+    setIsModal1Open(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const closeModal1 = () => {
+    setIsModal1Open(false);
+  };
+
   return (
    
     <Box
     className='pixel'
-    fontFamily= 'myFirstFont'
-    height='63vh'
-    width='100%'
+    fontFamily='myFirstFont'
+    
+    width='70%'
     margin={{ xs: '5px', md: '30px' }}
     borderRadius='30px'
     padding='30px'
     backgroundColor='#00350E'
-      display='flex'    
-      flexDirection='column'  
-      alignContent='center'
-    // justifyContent='center'
-     alignItems='center'
-    >
+    display='flex'
+    flexDirection='column'
+    alignContent='center'
+    alignItems='center'
+  >
 
-      <Box
-        width='60%'
-      >
+      
         
         
       <Box
@@ -129,52 +203,15 @@ export default function Payment() {
           style={{
           display:'flex',
           justifyContent: 'space-between',
-          // border: '3px solid',
-          marginLeft: '25px',
-          marginRight:'15%',
+          alignItems: 'center',
+          
+          width: '80%',
           fontFamily:'myFirstFont'
 
         }}
         >
-          <TextField
-           className='pixel1'
-            variant='outlined'
-            placeholder='Enter Cashout amount'
-            value={withdrawAmount} // Bind the input field with withdrawAmount state
-            onChange={(e) => setWithdrawAmount(e.target.value)} // Update withdrawAmount state when the input changes
-            InputProps={{
-              style: {
-                color: 'white',
-                border: '10px solid #green',
-                borderRadius:'25px',
-                fontFamily:'myFirstFont',
-                fontSize: '1.5vw'
-
-              },
-               
-            }}
-            InputLabelProps={{
-              style: { color: 'white' },           
-          }}
-            
-          />
-          <Button
-        style={{
-          fontSize: '18px',
-          fontWeight: '100',
-          color: 'white',
-          textAlign: 'center',
-          backgroundColor: '#1D9A3C',
-          margin: '0',
-          width: '40%',
-          height: '8vh',
-          borderRadius: '25px',
-          fontFamily: 'inherit',
-        }}
-        onClick={() => setIsModalOpen(true)}
-      >
-        Submit
-      </Button>
+         
+         
 
       <Modal style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}} open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box className='modal-content'>
@@ -206,14 +243,18 @@ export default function Payment() {
               fontWeight: '100',
               color: 'white',
               textAlign: 'center',
+              fontFamily: 'myFirstFont',
               backgroundColor: '#1D9A3C',
               width: '100%',
               borderRadius: '25px',
             }}
-            onClick={handleWithdrawalSubmit}
+            onClick={notify}
+            
           >
             Submit
           </Button>
+          <Toaster />
+
         </Box>
       </Modal>
     </Box>
@@ -227,53 +268,59 @@ export default function Payment() {
       
         <div style={{
           display:'flex',
-          justifyContent: 'center',
-          // border: '3px solid',
-          marginLeft: '25px',
-          marginRight:'15%',
-          fontFamily: 'myFirstFont'
+          justifyContent: 'space-evenly',
+          width: '80%',
+          fontFamily: 'myFirstFont',
+          flexWrap: 'wrap',
+
+         
+
+          
 
         }}>
-          {/* <Button variant='contained'
-          
-            style={{
-              fontSize: '18px',                                      
-               fontWeight: '100',
-               color: 'Black',
-               textAlign: 'center',
-               backgroundColor: '#FFD100',
-               margin: '0',
-               width: '40%',
-               height: '5vh',
-               borderRadius:'25px',
-               fontFamily:'inherit'
+         <Button
+             
+             variant="contained"
+             className='pixel1'
+             color="primary"
+             size="large"
+             style={{ margin: '20px 0', backgroundColor: '#ffd100', fontFamily: 'inherit', color : 'black' }}
+         
+          onClick={openModal1}>
+        Add Money
+      </Button>
 
-            }}
-          >
-    Add Money
-  </Button> */}
+
+      {isModal1Open && (
+        <Modal1 handleClose={closeModal1}>
+          <Stripe />
+        </Modal1>
+      )}
+
+        <Button
+         variant="contained"
+         className='pixel1'
+         color="primary"
+         size="large"
+         style={{ margin: '20px 0', backgroundColor: '#ffd100', fontFamily: 'inherit' , color : 'black' }}
+        onClick={() => setIsModalOpen(true)}
+      >
+        Withdraw Cash
+      </Button>
           <Button
-            style={{
-              fontSize: '18px',
-               
-               fontWeight: '100',
-               color: 'white',
-               textAlign: 'center',
-               backgroundColor: '#1D9A3C',
-               margin: '0',
-               width: '40%',
-                     height: '5vh',
-               borderRadius:'25px',
-               fontFamily: 'inherit'
-
-          }}
+             
+             variant="contained"
+             className='pixel1'
+             color="primary"
+             size="large"
+             style={{ margin: '20px 0', backgroundColor: 'green', fontFamily: 'inherit' }}
           onClick={handleButtonClick}
           >
      Back to game
   </Button>
 </div> 
 
-    </Box> 
+    
     {errorMessage && (
         <Box style={{ marginTop: '20px', color: 'red', fontFamily: 'myFirstFont' }}>
           {errorMessage}

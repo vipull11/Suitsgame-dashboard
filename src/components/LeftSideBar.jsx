@@ -20,9 +20,12 @@ const [paymentBackground, setpaymentbackground] =
         return <div></div>;
       }
       const handleFaqClick = () => {
-        // Do something when the "FAQs" option is clicked
-        // For example, change the state to render the FAQ component
-        setAccount(2); // Assuming 2 corresponds to the FAQ component
+       
+        setAccount(2); 
+      };
+      const handleContactClick = () => {
+       
+        setAccount(3); 
       };
 
   return (
@@ -92,18 +95,18 @@ const [paymentBackground, setpaymentbackground] =
 
     </p>
 
-    <Box textAlign={{ xs: 'center', md: 'left' }} marginLeft={{ md: '20px' }}>
+    {/* <Box textAlign={{ xs: 'center', md: 'left' }} marginLeft={{ md: '20px' }}>
         <p style={{ fontSize: '23px',  fontfamily: 'myFirstFont',
- }}>Help and Support</p>
+ }}>Help and Support</p> */}
 
         <Box 
         fontWeight='100'
 >
             <p style={{ cursor: 'pointer' }} onClick={handleFaqClick}>FAQs</p>
-            <p>Tutorial</p>
-            <p>Contact us</p>
+            
+            <p style={{ cursor: 'pointer' }} onClick={handleContactClick}>Contact us</p>
         </Box>
-    </Box>
+   
 
     <Box
         display={{ xs: 'block', md: 'flex' }}

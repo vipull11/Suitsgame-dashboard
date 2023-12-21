@@ -3,6 +3,68 @@
   src: url(../fonts/Pixellari3.ttf);
 }
 
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+ 
+  height: 100vh;
+  background-color: #076802;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.mobile-sidebar.expanded {
+  left: 0;
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  margin: 6px 0;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.hamburger-icon.expanded {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-icon.expanded:before {
+  transform: rotate(90deg) translate(8px, -8px);
+}
+
+.sidebar-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+
+.toggle-button {
+  background-color: #0E6725;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: width 1s ease;
+}
+
+.toggle-button.expanded {
+  
+}
+
+
+/* Add additional styles for your sidebar content elements */
+
 .modal-content {
   width: 300px;
   text-align: center;
@@ -19,9 +81,15 @@
     border-image: url(rectangle.png) 50 round;
  
 }
+.pixel7{
+  border: 20px solid transparent;
+  
+  border-image: url(rectangle.png) 50 round;
+}
 .payment-box{
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 /* style.css */
 .rounded-button {
@@ -67,7 +135,7 @@
 .box-right{
     border: 25px solid transparent;
     border-image: url(rectangle.png) 50 round;
-    width: 20vw;
+    
     height: 5vh;
     display: flex;
     flex-direction: row;
@@ -80,6 +148,13 @@
     flex-direction: column;
     align-items: flex-end;
     font-family: 'myFirstFont';
+}
+
+.box-right-id1{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'myFirstFont';
 }
 
 .pixel1{
@@ -248,4 +323,13 @@
 		--bg: #055f20;
 		--fg: #c7cad1;
 	}
+}
+
+@media (max-width: 767px) {
+  .pixel7 {
+    height: 100vh;
+  }
+  /* .pixel {
+    height: 100vh;
+  } */
 }
